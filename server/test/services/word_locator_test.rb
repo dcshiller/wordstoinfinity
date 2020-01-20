@@ -12,21 +12,22 @@ class WordLocatorTest < ActiveSupport::TestCase
     ]
     grid.each.with_index do |row, y_idx|
       row.each.with_index do |l, x_idx|
-        Letter.new x: x_idx, y: y_idx, value: l, word: Word.new unless l == "_"
+        create :letter, x: x_idx, y: y_idx, value: l, word: Word.new unless l == "_"
       end
     end
   end
 
   test "Try" do
     setup_letters
-    a = Letter.where( x: 2, y: 1).first
-    r = Letter.where( x: 3, y: 1).first
-    o = Letter.where( x: 5, y: 1).first
-    located_words = WordLocator.new([a, r, o]).locate
-    return
+    located_words = WordLocator.new(0, 0).locate
     assert located_words.include?('arrow')
     assert located_words.include?('tattoo')
-    refute located_words.include?('cat')
-    refute located_words.include?('sword')
+    refute located_words.include?('cad')
+    refute located_words.include?('word')
+    located_words = WordLocator.new(3, 3, 3).locate
+    refute located_words.include?('arrow')
+    refute located_words.include?('tattoo')
+    assert located_words.include?('oat')
+    assert located_words.include?('root')
   end
 end

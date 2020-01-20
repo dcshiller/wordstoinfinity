@@ -1,46 +1,45 @@
 class WordLocator
-  def initialize(letters)
-    @letters = letters
+  def initialize(centered_at_x, centered_at_y, radius = 50)
+    @x_min = centered_at_x - radius
+    @x_max = centered_at_x + radius
+    @y_min = centered_at_y - radius
+    @y_max = centered_at_y + radius
   end
 
   def locate
-    r = <<~SQL
+    query = <<~SQL
     WITH subset AS (
       SELECT *
       FROM letters
-      WHERE letters.x BETWEEN ? AND ?
-        AND letters.y BETWEEN ? AND ?
-    ),
-    x_consequentialized AS (
-      SELECT *,
-      x = lag(x) - 1 && y = lag(y) AS x_contiguous,
-      FROM subset
-    ),
-    y_consequentialized AS (
-      SELECT *,
-      y = lag(y) - 1 && x = lag(x) AS y_contiguous,
-      FROM subset
-    ),
-    grouped AS (),
+      WHERE letters.x BETWEEN :x_min AND :x_max
+        AND letters.y BETWEEN :y_min AND :y_max
+    )
 
-    SELECT x FROM y
+    SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+      SELECT *,
+        SUM(CASE WHEN (lag != (x - 1) OR lag IS NULL) AND x != :x_min THEN 1 ELSE 0 END)
+          OVER (PARTITION BY y ORDER BY x)
+      FROM ( SELECT *, lag(x) OVER ( PARTITION BY y ORDER BY x ) FROM subset) AS partitioned ) AS marked
+      WHERE sum > 0
+      GROUP BY y, sum
+      HAVING count(*) > 1 AND max(x) < :x_max
+    UNION
+    SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+      SELECT *,
+        SUM(CASE WHEN (lag != (y - 1) OR lag IS NULL) AND y != :y_min THEN 1 ELSE 0 END)
+          OVER (PARTITION BY x ORDER BY y)
+      FROM (
+        SELECT *, lag(y) OVER ( PARTITION BY x ORDER BY y ) FROM subset) AS partitioned) AS marked
+      WHERE sum > 0
+      GROUP BY x, sum
+      HAVING count(*) > 1 AND max(y) < :y_max;
     SQL
 
-    test = <<~SQL
-    SELECT *
-      FROM letters
-    WHERE letters.x BETWEEN ? AND ?
-      AND letters.y BETWEEN ? AND ?
-    SQL
     sanitized_query = ActiveRecord::Base.send(:sanitize_sql_array, [
-      test,
-      '3',
-      '4',
-      '1',
-      '2',
+      query,  x_min: @x_min, x_max: @x_max, y_min: @y_min, y_max: @y_max
     ])
-    ActiveRecord::Base.logger = Logger.new(STDOUT)
-    x = ActiveRecord::Base.connection.execute(sanitized_query);
-    debugger
+
+    results = ActiveRecord::Base.connection.execute(sanitized_query)
+    results.map { |r| r['string_agg'] }
   end
 end

@@ -244,3 +244,116 @@ Migrating to CreatePlayers (20200119183145)
   [1m[35m (2.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   [1m[36mLetter Load (4.3ms)[0m  [1m[34mSELECT "letters".* FROM "letters" ORDER BY "letters"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
   [1m[36mLetter Load (2.1ms)[0m  [1m[34mSELECT "letters".* FROM "letters" ORDER BY "letters"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (641.5ms)[0m  [1m[35mCREATE DATABASE "server_development" ENCODING = 'unicode'[0m
+  [1m[35m (361.7ms)[0m  [1m[35mCREATE DATABASE "server_test" ENCODING = 'unicode'[0m
+  [1m[35m (21.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (27.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4709995827031202925)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddForeignKeyConstraintToActiveStorageAttachmentsForBlobId (20200119182827)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (2.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200119182827"]]
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateLetters (20200119182837)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.4ms)[0m  [1m[35mCREATE TABLE "letters" ("id" bigserial primary key, "x" integer, "y" integer, "value" character varying, "word_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (24.5ms)[0m  [1m[35mCREATE  INDEX  "index_letters_on_x" ON "letters"  ("x")[0m
+  [1m[35m (11.7ms)[0m  [1m[35mCREATE  INDEX  "index_letters_on_y" ON "letters"  ("y")[0m
+  [1m[35m (17.6ms)[0m  [1m[35mCREATE  INDEX  "index_letters_on_word_id" ON "letters"  ("word_id")[0m
+  [1m[35m (11.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_letters_on_x_and_y" ON "letters"  ("x", "y")[0m
+  [1m[36mprimary::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200119182837"]]
+  [1m[35m (8.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateWords (20200119183112)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.9ms)[0m  [1m[35mCREATE TABLE "words" ("id" bigserial primary key, "player_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE  INDEX  "index_words_on_player_id" ON "words"  ("player_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200119183112"]]
+  [1m[35m (8.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePlayers (20200119183145)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (24.2ms)[0m  [1m[35mCREATE TABLE "players" ("id" bigserial primary key, "remote_address" character varying, "score" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200119183145"]]
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-01-20 14:27:32.569159"], ["updated_at", "2020-01-20 14:27:32.569159"]]
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4709995827031202925)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mLetter Load (1.9ms)[0m  [1m[34mSELECT "letters".* FROM "letters" ORDER BY "letters"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (1.6ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 0], ["value", "c"], ["created_at", "2020-01-20 14:37:07.377950"], ["updated_at", "2020-01-20 14:37:07.377950"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.4ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 1], ["y", 0], ["value", "a"], ["created_at", "2020-01-20 14:37:07.389335"], ["updated_at", "2020-01-20 14:37:07.389335"]]
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.4ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 0], ["value", "t"], ["created_at", "2020-01-20 14:37:07.396935"], ["updated_at", "2020-01-20 14:37:07.396935"]]
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.5ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 0], ["value", "s"], ["created_at", "2020-01-20 14:37:07.403739"], ["updated_at", "2020-01-20 14:37:07.403739"]]
+  [1m[35m (8.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.8ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 1], ["value", "a"], ["created_at", "2020-01-20 14:37:07.417284"], ["updated_at", "2020-01-20 14:37:07.417284"]]
+  [1m[35m (14.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (1.5ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 1], ["value", "a"], ["created_at", "2020-01-20 14:37:07.446582"], ["updated_at", "2020-01-20 14:37:07.446582"]]
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (1.3ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 3], ["y", 1], ["value", "r"], ["created_at", "2020-01-20 14:37:07.468214"], ["updated_at", "2020-01-20 14:37:07.468214"]]
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (1.7ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 1], ["value", "r"], ["created_at", "2020-01-20 14:37:07.489819"], ["updated_at", "2020-01-20 14:37:07.489819"]]
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (1.2ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 5], ["y", 1], ["value", "o"], ["created_at", "2020-01-20 14:37:07.512621"], ["updated_at", "2020-01-20 14:37:07.512621"]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (1.7ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 1], ["value", "w"], ["created_at", "2020-01-20 14:37:07.537799"], ["updated_at", "2020-01-20 14:37:07.537799"]]
+  [1m[35m (3.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (1.4ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 2], ["value", "r"], ["created_at", "2020-01-20 14:37:07.572027"], ["updated_at", "2020-01-20 14:37:07.572027"]]
+  [1m[35m (3.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.6ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 1], ["y", 2], ["value", "a"], ["created_at", "2020-01-20 14:37:07.592487"], ["updated_at", "2020-01-20 14:37:07.592487"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.3ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 2], ["value", "t"], ["created_at", "2020-01-20 14:37:07.619938"], ["updated_at", "2020-01-20 14:37:07.619938"]]
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.3ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 2], ["value", "o"], ["created_at", "2020-01-20 14:37:07.627839"], ["updated_at", "2020-01-20 14:37:07.627839"]]
+  [1m[35m (8.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.4ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 2], ["value", "o"], ["created_at", "2020-01-20 14:37:07.639437"], ["updated_at", "2020-01-20 14:37:07.639437"]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.3ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 3], ["value", "t"], ["created_at", "2020-01-20 14:37:07.645326"], ["updated_at", "2020-01-20 14:37:07.645326"]]
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.3ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 3], ["value", "t"], ["created_at", "2020-01-20 14:37:07.650002"], ["updated_at", "2020-01-20 14:37:07.650002"]]
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.3ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 3], ["value", "o"], ["created_at", "2020-01-20 14:37:07.654627"], ["updated_at", "2020-01-20 14:37:07.654627"]]
+  [1m[35m (6.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.3ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 5], ["y", 3], ["value", "a"], ["created_at", "2020-01-20 14:37:07.664306"], ["updated_at", "2020-01-20 14:37:07.664306"]]
+  [1m[35m (6.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.4ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 3], ["value", "r"], ["created_at", "2020-01-20 14:37:07.673846"], ["updated_at", "2020-01-20 14:37:07.673846"]]
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.4ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 4], ["value", "o"], ["created_at", "2020-01-20 14:37:07.678922"], ["updated_at", "2020-01-20 14:37:07.678922"]]
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.3ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 3], ["y", 4], ["value", "a"], ["created_at", "2020-01-20 14:37:07.683859"], ["updated_at", "2020-01-20 14:37:07.683859"]]
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (0.9ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 4], ["value", "t"], ["created_at", "2020-01-20 14:37:07.693109"], ["updated_at", "2020-01-20 14:37:07.693109"]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (1.1ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 4], ["value", "d"], ["created_at", "2020-01-20 14:37:07.709006"], ["updated_at", "2020-01-20 14:37:07.709006"]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLetter Create (1.6ms)[0m  [1m[32mINSERT INTO "letters" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 5], ["value", "o"], ["created_at", "2020-01-20 14:37:07.722701"], ["updated_at", "2020-01-20 14:37:07.722701"]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mLetter Load (1.1ms)[0m  [1m[34mSELECT "letters".* FROM "letters" ORDER BY "letters"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
