@@ -15,17 +15,24 @@ ActiveRecord::Schema.define(version: 2020_01_19_183145) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "letters", force: :cascade do |t|
+  create_table "moves", force: :cascade do |t|
+    t.bigint "player_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_moves_on_player_id"
+  end
+
+  create_table "placements", force: :cascade do |t|
     t.integer "x"
     t.integer "y"
     t.string "value"
-    t.bigint "word_id"
+    t.bigint "move_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["word_id"], name: "index_letters_on_word_id"
-    t.index ["x", "y"], name: "index_letters_on_x_and_y", unique: true
-    t.index ["x"], name: "index_letters_on_x"
-    t.index ["y"], name: "index_letters_on_y"
+    t.index ["move_id"], name: "index_placements_on_move_id"
+    t.index ["x", "y"], name: "index_placements_on_x_and_y", unique: true
+    t.index ["x"], name: "index_placements_on_x"
+    t.index ["y"], name: "index_placements_on_y"
   end
 
   create_table "players", force: :cascade do |t|
@@ -33,13 +40,6 @@ ActiveRecord::Schema.define(version: 2020_01_19_183145) do
     t.integer "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "words", force: :cascade do |t|
-    t.bigint "player_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["player_id"], name: "index_words_on_player_id"
   end
 
 end

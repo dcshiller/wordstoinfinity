@@ -22892,3 +22892,1032 @@ WordTest: test_Basics
   [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
   [1m[36mLetter Load (0.3ms)[0m  [1m[34mSELECT "letters".* FROM "letters" WHERE "letters"."word_id" = $1[0m  [["word_id", 187]]
   [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (26.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (30.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2893790528850865980)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddForeignKeyConstraintToActiveStorageAttachmentsForBlobId (20200119182827)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200119182827"]]
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePlacements (20200119182837)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (13.9ms)[0m  [1m[35mCREATE TABLE "placements" ("id" bigserial primary key, "x" integer, "y" integer, "value" character varying, "move_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (11.3ms)[0m  [1m[35mCREATE  INDEX  "index_placements_on_x" ON "placements"  ("x")[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE  INDEX  "index_placements_on_y" ON "placements"  ("y")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mCREATE  INDEX  "index_placements_on_move_id" ON "placements"  ("move_id")[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_placements_on_x_and_y" ON "placements"  ("x", "y")[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200119182837"]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMoves (20200119183112)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (15.5ms)[0m  [1m[35mCREATE TABLE "moves" ("id" bigserial primary key, "player_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (11.8ms)[0m  [1m[35mCREATE  INDEX  "index_moves_on_player_id" ON "moves"  ("player_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200119183112"]]
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePlayers (20200119183145)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.2ms)[0m  [1m[35mCREATE TABLE "players" ("id" bigserial primary key, "remote_address" character varying, "score" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200119183145"]]
+  [1m[35m (9.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2020-01-20 20:50:36.046862"], ["updated_at", "2020-01-20 20:50:36.046862"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2893790528850865980)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (117.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "server_test"[0m
+  [1m[35m (359.9ms)[0m  [1m[35mCREATE DATABASE "server_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "moves" CASCADE[0m
+  [1m[35m (17.5ms)[0m  [1m[35mCREATE TABLE "moves" ("id" bigserial primary key, "player_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (7.4ms)[0m  [1m[35mCREATE  INDEX  "index_moves_on_player_id" ON "moves"  ("player_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "placements" CASCADE[0m
+  [1m[35m (24.3ms)[0m  [1m[35mCREATE TABLE "placements" ("id" bigserial primary key, "x" integer, "y" integer, "value" character varying, "move_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (13.5ms)[0m  [1m[35mCREATE  INDEX  "index_placements_on_move_id" ON "placements"  ("move_id")[0m
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_placements_on_x_and_y" ON "placements"  ("x", "y")[0m
+  [1m[35m (13.5ms)[0m  [1m[35mCREATE  INDEX  "index_placements_on_x" ON "placements"  ("x")[0m
+  [1m[35m (13.0ms)[0m  [1m[35mCREATE  INDEX  "index_placements_on_y" ON "placements"  ("y")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "players" CASCADE[0m
+  [1m[35m (17.7ms)[0m  [1m[35mCREATE TABLE "players" ("id" bigserial primary key, "remote_address" character varying, "score" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (26.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200119183145)[0m
+  [1m[35m (8.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200119182827),
+(20200119182837),
+(20200119183112);
+
+[0m
+  [1m[35m (32.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2020-01-20 20:50:47.631233"], ["updated_at", "2020-01-20 20:50:47.631233"]]
+  [1m[35m (8.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "2f908aaedd7c56cca748e5ce55b3519a6099cf9b"], ["created_at", "2020-01-20 20:50:47.651346"], ["updated_at", "2020-01-20 20:50:47.651346"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------
+LetterTest: test_the_truth
+--------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------
+WordTest: test_Basics
+---------------------
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------
+WordLocatorTest: test_Try
+-------------------------
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2893790528850865980)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2893790528850865980)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------
+WordTest: test_Basics
+---------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlayer Create (0.7ms)[0m  [1m[32mINSERT INTO "players" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2020-01-20 20:52:14.756522"], ["updated_at", "2020-01-20 20:52:14.756522"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMove Create (0.7ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["player_id", 1], ["created_at", "2020-01-20 20:52:14.770076"], ["updated_at", "2020-01-20 20:52:14.770076"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-------------------------
+WordLocatorTest: test_Try
+-------------------------
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------
+LetterTest: test_the_truth
+--------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlayer Create (0.3ms)[0m  [1m[32mINSERT INTO "players" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2020-01-20 20:52:14.793267"], ["updated_at", "2020-01-20 20:52:14.793267"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMove Create (0.2ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["player_id", 2], ["created_at", "2020-01-20 20:52:14.795299"], ["updated_at", "2020-01-20 20:52:14.795299"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.7ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 1], ["y", 1], ["value", "b"], ["move_id", 2], ["created_at", "2020-01-20 20:52:14.797377"], ["updated_at", "2020-01-20 20:52:14.797377"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------
+LetterTest: test_the_truth
+--------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlayer Create (0.6ms)[0m  [1m[32mINSERT INTO "players" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2020-01-20 20:52:47.377623"], ["updated_at", "2020-01-20 20:52:47.377623"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMove Create (0.4ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["player_id", 3], ["created_at", "2020-01-20 20:52:47.381623"], ["updated_at", "2020-01-20 20:52:47.381623"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 1], ["y", 1], ["value", "a"], ["move_id", 3], ["created_at", "2020-01-20 20:52:47.383830"], ["updated_at", "2020-01-20 20:52:47.383830"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------
+WordTest: test_Basics
+---------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlayer Create (0.3ms)[0m  [1m[32mINSERT INTO "players" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2020-01-20 20:52:47.387403"], ["updated_at", "2020-01-20 20:52:47.387403"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMove Create (0.2ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["player_id", 4], ["created_at", "2020-01-20 20:52:47.389170"], ["updated_at", "2020-01-20 20:52:47.389170"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------
+WordLocatorTest: test_Try
+-------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 0], ["value", "c"], ["created_at", "2020-01-20 20:52:47.395987"], ["updated_at", "2020-01-20 20:52:47.395987"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.5ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 1], ["y", 0], ["value", "a"], ["created_at", "2020-01-20 20:52:47.399594"], ["updated_at", "2020-01-20 20:52:47.399594"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 0], ["value", "t"], ["created_at", "2020-01-20 20:52:47.403092"], ["updated_at", "2020-01-20 20:52:47.403092"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 0], ["value", "s"], ["created_at", "2020-01-20 20:52:47.405603"], ["updated_at", "2020-01-20 20:52:47.405603"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 1], ["value", "a"], ["created_at", "2020-01-20 20:52:47.408046"], ["updated_at", "2020-01-20 20:52:47.408046"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 1], ["value", "a"], ["created_at", "2020-01-20 20:52:47.410692"], ["updated_at", "2020-01-20 20:52:47.410692"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 3], ["y", 1], ["value", "r"], ["created_at", "2020-01-20 20:52:47.413004"], ["updated_at", "2020-01-20 20:52:47.413004"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 1], ["value", "r"], ["created_at", "2020-01-20 20:52:47.415323"], ["updated_at", "2020-01-20 20:52:47.415323"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 5], ["y", 1], ["value", "o"], ["created_at", "2020-01-20 20:52:47.417476"], ["updated_at", "2020-01-20 20:52:47.417476"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 1], ["value", "w"], ["created_at", "2020-01-20 20:52:47.420779"], ["updated_at", "2020-01-20 20:52:47.420779"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 2], ["value", "r"], ["created_at", "2020-01-20 20:52:47.423898"], ["updated_at", "2020-01-20 20:52:47.423898"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 1], ["y", 2], ["value", "a"], ["created_at", "2020-01-20 20:52:47.426138"], ["updated_at", "2020-01-20 20:52:47.426138"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 2], ["value", "t"], ["created_at", "2020-01-20 20:52:47.428667"], ["updated_at", "2020-01-20 20:52:47.428667"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 2], ["value", "o"], ["created_at", "2020-01-20 20:52:47.431732"], ["updated_at", "2020-01-20 20:52:47.431732"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 2], ["value", "o"], ["created_at", "2020-01-20 20:52:47.435573"], ["updated_at", "2020-01-20 20:52:47.435573"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 3], ["value", "t"], ["created_at", "2020-01-20 20:52:47.438587"], ["updated_at", "2020-01-20 20:52:47.438587"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 3], ["value", "t"], ["created_at", "2020-01-20 20:52:47.441026"], ["updated_at", "2020-01-20 20:52:47.441026"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 3], ["value", "o"], ["created_at", "2020-01-20 20:52:47.443566"], ["updated_at", "2020-01-20 20:52:47.443566"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 5], ["y", 3], ["value", "a"], ["created_at", "2020-01-20 20:52:47.445947"], ["updated_at", "2020-01-20 20:52:47.445947"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 3], ["value", "r"], ["created_at", "2020-01-20 20:52:47.448152"], ["updated_at", "2020-01-20 20:52:47.448152"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 4], ["value", "o"], ["created_at", "2020-01-20 20:52:47.450350"], ["updated_at", "2020-01-20 20:52:47.450350"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 3], ["y", 4], ["value", "a"], ["created_at", "2020-01-20 20:52:47.452539"], ["updated_at", "2020-01-20 20:52:47.452539"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 4], ["value", "t"], ["created_at", "2020-01-20 20:52:47.455012"], ["updated_at", "2020-01-20 20:52:47.455012"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 4], ["value", "d"], ["created_at", "2020-01-20 20:52:47.457388"], ["updated_at", "2020-01-20 20:52:47.457388"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 5], ["value", "o"], ["created_at", "2020-01-20 20:52:47.459665"], ["updated_at", "2020-01-20 20:52:47.459665"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (2.1ms)[0m  [1m[35mWITH subset AS (
+  SELECT *
+  FROM placements
+  WHERE placements.x BETWEEN -50 AND 50
+    AND placements.y BETWEEN -50 AND 50
+)
+
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (x - 1) OR lag IS NULL) AND x != -50 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY y ORDER BY x)
+  FROM ( SELECT *, lag(x) OVER ( PARTITION BY y ORDER BY x ) FROM subset) AS partitioned ) AS marked
+  WHERE sum > 0
+  GROUP BY y, sum
+  HAVING count(*) > 1 AND max(x) < 50
+UNION
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (y - 1) OR lag IS NULL) AND y != -50 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY x ORDER BY y)
+  FROM (
+    SELECT *, lag(y) OVER ( PARTITION BY x ORDER BY y ) FROM subset) AS partitioned) AS marked
+  WHERE sum > 0
+  GROUP BY x, sum
+  HAVING count(*) > 1 AND max(y) < 50;
+[0m
+  [1m[35m (1.0ms)[0m  [1m[35mWITH subset AS (
+  SELECT *
+  FROM placements
+  WHERE placements.x BETWEEN 0 AND 6
+    AND placements.y BETWEEN 0 AND 6
+)
+
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (x - 1) OR lag IS NULL) AND x != 0 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY y ORDER BY x)
+  FROM ( SELECT *, lag(x) OVER ( PARTITION BY y ORDER BY x ) FROM subset) AS partitioned ) AS marked
+  WHERE sum > 0
+  GROUP BY y, sum
+  HAVING count(*) > 1 AND max(x) < 6
+UNION
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (y - 1) OR lag IS NULL) AND y != 0 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY x ORDER BY y)
+  FROM (
+    SELECT *, lag(y) OVER ( PARTITION BY x ORDER BY y ) FROM subset) AS partitioned) AS marked
+  WHERE sum > 0
+  GROUP BY x, sum
+  HAVING count(*) > 1 AND max(y) < 6;
+[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------
+WordTest: test_Basics
+---------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlayer Create (0.7ms)[0m  [1m[32mINSERT INTO "players" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2020-01-20 20:53:42.353065"], ["updated_at", "2020-01-20 20:53:42.353065"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMove Create (0.5ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["player_id", 5], ["created_at", "2020-01-20 20:53:42.357787"], ["updated_at", "2020-01-20 20:53:42.357787"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.6ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 1], ["y", 1], ["value", "t"], ["move_id", 5], ["created_at", "2020-01-20 20:53:42.372289"], ["updated_at", "2020-01-20 20:53:42.372289"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 2], ["y", 1], ["value", "e"], ["move_id", 5], ["created_at", "2020-01-20 20:53:42.375195"], ["updated_at", "2020-01-20 20:53:42.375195"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (1.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 3], ["y", 1], ["value", "s"], ["move_id", 5], ["created_at", "2020-01-20 20:53:42.378159"], ["updated_at", "2020-01-20 20:53:42.378159"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 4], ["y", 1], ["value", "t"], ["move_id", 5], ["created_at", "2020-01-20 20:53:42.383490"], ["updated_at", "2020-01-20 20:53:42.383490"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------
+LetterTest: test_the_truth
+--------------------------
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlayer Create (0.3ms)[0m  [1m[32mINSERT INTO "players" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2020-01-20 20:53:42.391596"], ["updated_at", "2020-01-20 20:53:42.391596"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMove Create (0.3ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["player_id", 6], ["created_at", "2020-01-20 20:53:42.393668"], ["updated_at", "2020-01-20 20:53:42.393668"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 5], ["y", 1], ["value", "x"], ["move_id", 6], ["created_at", "2020-01-20 20:53:42.396345"], ["updated_at", "2020-01-20 20:53:42.396345"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------
+WordLocatorTest: test_Try
+-------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 0], ["value", "c"], ["created_at", "2020-01-20 20:53:42.403502"], ["updated_at", "2020-01-20 20:53:42.403502"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 1], ["y", 0], ["value", "a"], ["created_at", "2020-01-20 20:53:42.408296"], ["updated_at", "2020-01-20 20:53:42.408296"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 0], ["value", "t"], ["created_at", "2020-01-20 20:53:42.412222"], ["updated_at", "2020-01-20 20:53:42.412222"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 0], ["value", "s"], ["created_at", "2020-01-20 20:53:42.415895"], ["updated_at", "2020-01-20 20:53:42.415895"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 1], ["value", "a"], ["created_at", "2020-01-20 20:53:42.419650"], ["updated_at", "2020-01-20 20:53:42.419650"]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.9ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 1], ["value", "a"], ["created_at", "2020-01-20 20:53:42.426380"], ["updated_at", "2020-01-20 20:53:42.426380"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.5ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 3], ["y", 1], ["value", "r"], ["created_at", "2020-01-20 20:53:42.430957"], ["updated_at", "2020-01-20 20:53:42.430957"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 1], ["value", "r"], ["created_at", "2020-01-20 20:53:42.435208"], ["updated_at", "2020-01-20 20:53:42.435208"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 5], ["y", 1], ["value", "o"], ["created_at", "2020-01-20 20:53:42.439588"], ["updated_at", "2020-01-20 20:53:42.439588"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 1], ["value", "w"], ["created_at", "2020-01-20 20:53:42.443646"], ["updated_at", "2020-01-20 20:53:42.443646"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 2], ["value", "r"], ["created_at", "2020-01-20 20:53:42.450547"], ["updated_at", "2020-01-20 20:53:42.450547"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 1], ["y", 2], ["value", "a"], ["created_at", "2020-01-20 20:53:42.454323"], ["updated_at", "2020-01-20 20:53:42.454323"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 2], ["value", "t"], ["created_at", "2020-01-20 20:53:42.458195"], ["updated_at", "2020-01-20 20:53:42.458195"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 2], ["value", "o"], ["created_at", "2020-01-20 20:53:42.462029"], ["updated_at", "2020-01-20 20:53:42.462029"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 2], ["value", "o"], ["created_at", "2020-01-20 20:53:42.465712"], ["updated_at", "2020-01-20 20:53:42.465712"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 3], ["value", "t"], ["created_at", "2020-01-20 20:53:42.469443"], ["updated_at", "2020-01-20 20:53:42.469443"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 3], ["value", "t"], ["created_at", "2020-01-20 20:53:42.473046"], ["updated_at", "2020-01-20 20:53:42.473046"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 3], ["value", "o"], ["created_at", "2020-01-20 20:53:42.475494"], ["updated_at", "2020-01-20 20:53:42.475494"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 5], ["y", 3], ["value", "a"], ["created_at", "2020-01-20 20:53:42.477635"], ["updated_at", "2020-01-20 20:53:42.477635"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 3], ["value", "r"], ["created_at", "2020-01-20 20:53:42.479969"], ["updated_at", "2020-01-20 20:53:42.479969"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 4], ["value", "o"], ["created_at", "2020-01-20 20:53:42.482494"], ["updated_at", "2020-01-20 20:53:42.482494"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (4.1ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 3], ["y", 4], ["value", "a"], ["created_at", "2020-01-20 20:53:42.485104"], ["updated_at", "2020-01-20 20:53:42.485104"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 4], ["value", "t"], ["created_at", "2020-01-20 20:53:42.491892"], ["updated_at", "2020-01-20 20:53:42.491892"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 4], ["value", "d"], ["created_at", "2020-01-20 20:53:42.494828"], ["updated_at", "2020-01-20 20:53:42.494828"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 5], ["value", "o"], ["created_at", "2020-01-20 20:53:42.498098"], ["updated_at", "2020-01-20 20:53:42.498098"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.9ms)[0m  [1m[35mWITH subset AS (
+  SELECT *
+  FROM placements
+  WHERE placements.x BETWEEN -50 AND 50
+    AND placements.y BETWEEN -50 AND 50
+)
+
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (x - 1) OR lag IS NULL) AND x != -50 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY y ORDER BY x)
+  FROM ( SELECT *, lag(x) OVER ( PARTITION BY y ORDER BY x ) FROM subset) AS partitioned ) AS marked
+  WHERE sum > 0
+  GROUP BY y, sum
+  HAVING count(*) > 1 AND max(x) < 50
+UNION
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (y - 1) OR lag IS NULL) AND y != -50 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY x ORDER BY y)
+  FROM (
+    SELECT *, lag(y) OVER ( PARTITION BY x ORDER BY y ) FROM subset) AS partitioned) AS marked
+  WHERE sum > 0
+  GROUP BY x, sum
+  HAVING count(*) > 1 AND max(y) < 50;
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mWITH subset AS (
+  SELECT *
+  FROM placements
+  WHERE placements.x BETWEEN 0 AND 6
+    AND placements.y BETWEEN 0 AND 6
+)
+
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (x - 1) OR lag IS NULL) AND x != 0 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY y ORDER BY x)
+  FROM ( SELECT *, lag(x) OVER ( PARTITION BY y ORDER BY x ) FROM subset) AS partitioned ) AS marked
+  WHERE sum > 0
+  GROUP BY y, sum
+  HAVING count(*) > 1 AND max(x) < 6
+UNION
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (y - 1) OR lag IS NULL) AND y != 0 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY x ORDER BY y)
+  FROM (
+    SELECT *, lag(y) OVER ( PARTITION BY x ORDER BY y ) FROM subset) AS partitioned) AS marked
+  WHERE sum > 0
+  GROUP BY x, sum
+  HAVING count(*) > 1 AND max(y) < 6;
+[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+--------------------------
+LetterTest: test_the_truth
+--------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlayer Create (0.5ms)[0m  [1m[32mINSERT INTO "players" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2020-01-20 20:53:58.405564"], ["updated_at", "2020-01-20 20:53:58.405564"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMove Create (0.4ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["player_id", 7], ["created_at", "2020-01-20 20:53:58.409056"], ["updated_at", "2020-01-20 20:53:58.409056"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.5ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 1], ["y", 1], ["value", "c"], ["move_id", 7], ["created_at", "2020-01-20 20:53:58.411119"], ["updated_at", "2020-01-20 20:53:58.411119"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------
+WordTest: test_Basics
+---------------------
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlayer Create (0.2ms)[0m  [1m[32mINSERT INTO "players" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2020-01-20 20:53:58.414389"], ["updated_at", "2020-01-20 20:53:58.414389"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMove Create (0.2ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["player_id", 8], ["created_at", "2020-01-20 20:53:58.415786"], ["updated_at", "2020-01-20 20:53:58.415786"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 2], ["y", 1], ["value", "t"], ["move_id", 8], ["created_at", "2020-01-20 20:53:58.417307"], ["updated_at", "2020-01-20 20:53:58.417307"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 3], ["y", 1], ["value", "e"], ["move_id", 8], ["created_at", "2020-01-20 20:53:58.418891"], ["updated_at", "2020-01-20 20:53:58.418891"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 4], ["y", 1], ["value", "s"], ["move_id", 8], ["created_at", "2020-01-20 20:53:58.420314"], ["updated_at", "2020-01-20 20:53:58.420314"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 5], ["y", 1], ["value", "t"], ["move_id", 8], ["created_at", "2020-01-20 20:53:58.421866"], ["updated_at", "2020-01-20 20:53:58.421866"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "placements" WHERE "placements"."move_id" = $1[0m  [["move_id", 8]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlayer Create (0.3ms)[0m  [1m[32mINSERT INTO "players" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2020-01-20 20:53:58.426795"], ["updated_at", "2020-01-20 20:53:58.426795"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMove Create (0.3ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["player_id", 9], ["created_at", "2020-01-20 20:53:58.428400"], ["updated_at", "2020-01-20 20:53:58.428400"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 6], ["y", 1], ["value", "t"], ["move_id", 9], ["created_at", "2020-01-20 20:53:58.430181"], ["updated_at", "2020-01-20 20:53:58.430181"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 7], ["y", 1], ["value", "e"], ["move_id", 9], ["created_at", "2020-01-20 20:53:58.431850"], ["updated_at", "2020-01-20 20:53:58.431850"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 8], ["y", 1], ["value", "s"], ["move_id", 9], ["created_at", "2020-01-20 20:53:58.433286"], ["updated_at", "2020-01-20 20:53:58.433286"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 9], ["y", 1], ["value", "t"], ["move_id", 9], ["created_at", "2020-01-20 20:53:58.434797"], ["updated_at", "2020-01-20 20:53:58.434797"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------
+WordLocatorTest: test_Try
+-------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 0], ["value", "c"], ["created_at", "2020-01-20 20:53:58.443273"], ["updated_at", "2020-01-20 20:53:58.443273"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 1], ["y", 0], ["value", "a"], ["created_at", "2020-01-20 20:53:58.446199"], ["updated_at", "2020-01-20 20:53:58.446199"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 0], ["value", "t"], ["created_at", "2020-01-20 20:53:58.448510"], ["updated_at", "2020-01-20 20:53:58.448510"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 0], ["value", "s"], ["created_at", "2020-01-20 20:53:58.450646"], ["updated_at", "2020-01-20 20:53:58.450646"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 1], ["value", "a"], ["created_at", "2020-01-20 20:53:58.452855"], ["updated_at", "2020-01-20 20:53:58.452855"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 1], ["value", "a"], ["created_at", "2020-01-20 20:53:58.455128"], ["updated_at", "2020-01-20 20:53:58.455128"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 3], ["y", 1], ["value", "r"], ["created_at", "2020-01-20 20:53:58.457302"], ["updated_at", "2020-01-20 20:53:58.457302"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 1], ["value", "r"], ["created_at", "2020-01-20 20:53:58.460294"], ["updated_at", "2020-01-20 20:53:58.460294"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 5], ["y", 1], ["value", "o"], ["created_at", "2020-01-20 20:53:58.464503"], ["updated_at", "2020-01-20 20:53:58.464503"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 1], ["value", "w"], ["created_at", "2020-01-20 20:53:58.466677"], ["updated_at", "2020-01-20 20:53:58.466677"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 2], ["value", "r"], ["created_at", "2020-01-20 20:53:58.468767"], ["updated_at", "2020-01-20 20:53:58.468767"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.9ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 1], ["y", 2], ["value", "a"], ["created_at", "2020-01-20 20:53:58.471276"], ["updated_at", "2020-01-20 20:53:58.471276"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (1.1ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 2], ["value", "t"], ["created_at", "2020-01-20 20:53:58.475259"], ["updated_at", "2020-01-20 20:53:58.475259"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 2], ["value", "o"], ["created_at", "2020-01-20 20:53:58.480247"], ["updated_at", "2020-01-20 20:53:58.480247"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 2], ["value", "o"], ["created_at", "2020-01-20 20:53:58.482509"], ["updated_at", "2020-01-20 20:53:58.482509"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 3], ["value", "t"], ["created_at", "2020-01-20 20:53:58.484708"], ["updated_at", "2020-01-20 20:53:58.484708"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 3], ["value", "t"], ["created_at", "2020-01-20 20:53:58.486917"], ["updated_at", "2020-01-20 20:53:58.486917"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 3], ["value", "o"], ["created_at", "2020-01-20 20:53:58.489576"], ["updated_at", "2020-01-20 20:53:58.489576"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 5], ["y", 3], ["value", "a"], ["created_at", "2020-01-20 20:53:58.492125"], ["updated_at", "2020-01-20 20:53:58.492125"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 3], ["value", "r"], ["created_at", "2020-01-20 20:53:58.494394"], ["updated_at", "2020-01-20 20:53:58.494394"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 4], ["value", "o"], ["created_at", "2020-01-20 20:53:58.496513"], ["updated_at", "2020-01-20 20:53:58.496513"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 3], ["y", 4], ["value", "a"], ["created_at", "2020-01-20 20:53:58.498709"], ["updated_at", "2020-01-20 20:53:58.498709"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 4], ["value", "t"], ["created_at", "2020-01-20 20:53:58.501022"], ["updated_at", "2020-01-20 20:53:58.501022"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 4], ["value", "d"], ["created_at", "2020-01-20 20:53:58.503576"], ["updated_at", "2020-01-20 20:53:58.503576"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 5], ["value", "o"], ["created_at", "2020-01-20 20:53:58.505942"], ["updated_at", "2020-01-20 20:53:58.505942"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.7ms)[0m  [1m[35mWITH subset AS (
+  SELECT *
+  FROM placements
+  WHERE placements.x BETWEEN -50 AND 50
+    AND placements.y BETWEEN -50 AND 50
+)
+
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (x - 1) OR lag IS NULL) AND x != -50 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY y ORDER BY x)
+  FROM ( SELECT *, lag(x) OVER ( PARTITION BY y ORDER BY x ) FROM subset) AS partitioned ) AS marked
+  WHERE sum > 0
+  GROUP BY y, sum
+  HAVING count(*) > 1 AND max(x) < 50
+UNION
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (y - 1) OR lag IS NULL) AND y != -50 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY x ORDER BY y)
+  FROM (
+    SELECT *, lag(y) OVER ( PARTITION BY x ORDER BY y ) FROM subset) AS partitioned) AS marked
+  WHERE sum > 0
+  GROUP BY x, sum
+  HAVING count(*) > 1 AND max(y) < 50;
+[0m
+  [1m[35m (2.8ms)[0m  [1m[35mWITH subset AS (
+  SELECT *
+  FROM placements
+  WHERE placements.x BETWEEN 0 AND 6
+    AND placements.y BETWEEN 0 AND 6
+)
+
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (x - 1) OR lag IS NULL) AND x != 0 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY y ORDER BY x)
+  FROM ( SELECT *, lag(x) OVER ( PARTITION BY y ORDER BY x ) FROM subset) AS partitioned ) AS marked
+  WHERE sum > 0
+  GROUP BY y, sum
+  HAVING count(*) > 1 AND max(x) < 6
+UNION
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (y - 1) OR lag IS NULL) AND y != 0 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY x ORDER BY y)
+  FROM (
+    SELECT *, lag(y) OVER ( PARTITION BY x ORDER BY y ) FROM subset) AS partitioned) AS marked
+  WHERE sum > 0
+  GROUP BY x, sum
+  HAVING count(*) > 1 AND max(y) < 6;
+[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------
+LetterTest: test_the_truth
+--------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlayer Create (0.6ms)[0m  [1m[32mINSERT INTO "players" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2020-01-20 20:54:34.963421"], ["updated_at", "2020-01-20 20:54:34.963421"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMove Create (0.4ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["player_id", 10], ["created_at", "2020-01-20 20:54:34.968250"], ["updated_at", "2020-01-20 20:54:34.968250"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 1], ["y", 1], ["value", "k"], ["move_id", 10], ["created_at", "2020-01-20 20:54:34.970610"], ["updated_at", "2020-01-20 20:54:34.970610"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------
+WordLocatorTest: test_Try
+-------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 0], ["value", "c"], ["created_at", "2020-01-20 20:54:34.975672"], ["updated_at", "2020-01-20 20:54:34.975672"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 1], ["y", 0], ["value", "a"], ["created_at", "2020-01-20 20:54:34.978348"], ["updated_at", "2020-01-20 20:54:34.978348"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 0], ["value", "t"], ["created_at", "2020-01-20 20:54:34.981700"], ["updated_at", "2020-01-20 20:54:34.981700"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 0], ["value", "s"], ["created_at", "2020-01-20 20:54:34.985767"], ["updated_at", "2020-01-20 20:54:34.985767"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 1], ["value", "a"], ["created_at", "2020-01-20 20:54:34.988711"], ["updated_at", "2020-01-20 20:54:34.988711"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 1], ["value", "a"], ["created_at", "2020-01-20 20:54:34.991119"], ["updated_at", "2020-01-20 20:54:34.991119"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 3], ["y", 1], ["value", "r"], ["created_at", "2020-01-20 20:54:34.993734"], ["updated_at", "2020-01-20 20:54:34.993734"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 1], ["value", "r"], ["created_at", "2020-01-20 20:54:34.996268"], ["updated_at", "2020-01-20 20:54:34.996268"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 5], ["y", 1], ["value", "o"], ["created_at", "2020-01-20 20:54:34.998479"], ["updated_at", "2020-01-20 20:54:34.998479"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 1], ["value", "w"], ["created_at", "2020-01-20 20:54:35.000596"], ["updated_at", "2020-01-20 20:54:35.000596"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 2], ["value", "r"], ["created_at", "2020-01-20 20:54:35.002987"], ["updated_at", "2020-01-20 20:54:35.002987"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 1], ["y", 2], ["value", "a"], ["created_at", "2020-01-20 20:54:35.005239"], ["updated_at", "2020-01-20 20:54:35.005239"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 2], ["value", "t"], ["created_at", "2020-01-20 20:54:35.008069"], ["updated_at", "2020-01-20 20:54:35.008069"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 2], ["value", "o"], ["created_at", "2020-01-20 20:54:35.010359"], ["updated_at", "2020-01-20 20:54:35.010359"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 2], ["value", "o"], ["created_at", "2020-01-20 20:54:35.013273"], ["updated_at", "2020-01-20 20:54:35.013273"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 3], ["value", "t"], ["created_at", "2020-01-20 20:54:35.016919"], ["updated_at", "2020-01-20 20:54:35.016919"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 3], ["value", "t"], ["created_at", "2020-01-20 20:54:35.020474"], ["updated_at", "2020-01-20 20:54:35.020474"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 3], ["value", "o"], ["created_at", "2020-01-20 20:54:35.022965"], ["updated_at", "2020-01-20 20:54:35.022965"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 5], ["y", 3], ["value", "a"], ["created_at", "2020-01-20 20:54:35.025480"], ["updated_at", "2020-01-20 20:54:35.025480"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 3], ["value", "r"], ["created_at", "2020-01-20 20:54:35.027939"], ["updated_at", "2020-01-20 20:54:35.027939"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 4], ["value", "o"], ["created_at", "2020-01-20 20:54:35.030161"], ["updated_at", "2020-01-20 20:54:35.030161"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 3], ["y", 4], ["value", "a"], ["created_at", "2020-01-20 20:54:35.032235"], ["updated_at", "2020-01-20 20:54:35.032235"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 4], ["value", "t"], ["created_at", "2020-01-20 20:54:35.034359"], ["updated_at", "2020-01-20 20:54:35.034359"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 4], ["value", "d"], ["created_at", "2020-01-20 20:54:35.036445"], ["updated_at", "2020-01-20 20:54:35.036445"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 5], ["value", "o"], ["created_at", "2020-01-20 20:54:35.038593"], ["updated_at", "2020-01-20 20:54:35.038593"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.8ms)[0m  [1m[35mWITH subset AS (
+  SELECT *
+  FROM placements
+  WHERE placements.x BETWEEN -50 AND 50
+    AND placements.y BETWEEN -50 AND 50
+)
+
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (x - 1) OR lag IS NULL) AND x != -50 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY y ORDER BY x)
+  FROM ( SELECT *, lag(x) OVER ( PARTITION BY y ORDER BY x ) FROM subset) AS partitioned ) AS marked
+  WHERE sum > 0
+  GROUP BY y, sum
+  HAVING count(*) > 1 AND max(x) < 50
+UNION
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (y - 1) OR lag IS NULL) AND y != -50 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY x ORDER BY y)
+  FROM (
+    SELECT *, lag(y) OVER ( PARTITION BY x ORDER BY y ) FROM subset) AS partitioned) AS marked
+  WHERE sum > 0
+  GROUP BY x, sum
+  HAVING count(*) > 1 AND max(y) < 50;
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mWITH subset AS (
+  SELECT *
+  FROM placements
+  WHERE placements.x BETWEEN 0 AND 6
+    AND placements.y BETWEEN 0 AND 6
+)
+
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (x - 1) OR lag IS NULL) AND x != 0 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY y ORDER BY x)
+  FROM ( SELECT *, lag(x) OVER ( PARTITION BY y ORDER BY x ) FROM subset) AS partitioned ) AS marked
+  WHERE sum > 0
+  GROUP BY y, sum
+  HAVING count(*) > 1 AND max(x) < 6
+UNION
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (y - 1) OR lag IS NULL) AND y != 0 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY x ORDER BY y)
+  FROM (
+    SELECT *, lag(y) OVER ( PARTITION BY x ORDER BY y ) FROM subset) AS partitioned) AS marked
+  WHERE sum > 0
+  GROUP BY x, sum
+  HAVING count(*) > 1 AND max(y) < 6;
+[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------
+WordTest: test_Basics
+---------------------
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlayer Create (0.3ms)[0m  [1m[32mINSERT INTO "players" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2020-01-20 20:54:35.045083"], ["updated_at", "2020-01-20 20:54:35.045083"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMove Create (0.2ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["player_id", 11], ["created_at", "2020-01-20 20:54:35.046818"], ["updated_at", "2020-01-20 20:54:35.046818"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 2], ["y", 1], ["value", "t"], ["move_id", 11], ["created_at", "2020-01-20 20:54:35.048320"], ["updated_at", "2020-01-20 20:54:35.048320"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 3], ["y", 1], ["value", "e"], ["move_id", 11], ["created_at", "2020-01-20 20:54:35.049793"], ["updated_at", "2020-01-20 20:54:35.049793"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 4], ["y", 1], ["value", "s"], ["move_id", 11], ["created_at", "2020-01-20 20:54:35.051226"], ["updated_at", "2020-01-20 20:54:35.051226"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 5], ["y", 1], ["value", "t"], ["move_id", 11], ["created_at", "2020-01-20 20:54:35.052603"], ["updated_at", "2020-01-20 20:54:35.052603"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "placements" WHERE "placements"."move_id" = $1[0m  [["move_id", 11]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlayer Create (0.2ms)[0m  [1m[32mINSERT INTO "players" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2020-01-20 20:54:35.057041"], ["updated_at", "2020-01-20 20:54:35.057041"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMove Create (0.2ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["player_id", 12], ["created_at", "2020-01-20 20:54:35.058505"], ["updated_at", "2020-01-20 20:54:35.058505"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 6], ["y", 1], ["value", "t"], ["move_id", 12], ["created_at", "2020-01-20 20:54:35.059952"], ["updated_at", "2020-01-20 20:54:35.059952"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 7], ["y", 1], ["value", "e"], ["move_id", 12], ["created_at", "2020-01-20 20:54:35.061355"], ["updated_at", "2020-01-20 20:54:35.061355"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 8], ["y", 1], ["value", "s"], ["move_id", 12], ["created_at", "2020-01-20 20:54:35.062744"], ["updated_at", "2020-01-20 20:54:35.062744"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 9], ["y", 1], ["value", "t"], ["move_id", 12], ["created_at", "2020-01-20 20:54:35.064141"], ["updated_at", "2020-01-20 20:54:35.064141"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mPlacement Load (0.2ms)[0m  [1m[34mSELECT "placements".* FROM "placements" WHERE "placements"."move_id" = $1 LIMIT $2[0m  [["move_id", 12], ["LIMIT", 11]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------
+LetterTest: test_the_truth
+--------------------------
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlayer Create (0.5ms)[0m  [1m[32mINSERT INTO "players" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2020-01-20 20:55:00.316730"], ["updated_at", "2020-01-20 20:55:00.316730"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMove Create (0.4ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["player_id", 13], ["created_at", "2020-01-20 20:55:00.320376"], ["updated_at", "2020-01-20 20:55:00.320376"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.6ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 1], ["y", 1], ["value", "f"], ["move_id", 13], ["created_at", "2020-01-20 20:55:00.322404"], ["updated_at", "2020-01-20 20:55:00.322404"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------
+WordLocatorTest: test_Try
+-------------------------
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 0], ["value", "c"], ["created_at", "2020-01-20 20:55:00.327740"], ["updated_at", "2020-01-20 20:55:00.327740"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 1], ["y", 0], ["value", "a"], ["created_at", "2020-01-20 20:55:00.330394"], ["updated_at", "2020-01-20 20:55:00.330394"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 0], ["value", "t"], ["created_at", "2020-01-20 20:55:00.332621"], ["updated_at", "2020-01-20 20:55:00.332621"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 0], ["value", "s"], ["created_at", "2020-01-20 20:55:00.334764"], ["updated_at", "2020-01-20 20:55:00.334764"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 1], ["value", "a"], ["created_at", "2020-01-20 20:55:00.337025"], ["updated_at", "2020-01-20 20:55:00.337025"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.4ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 1], ["value", "a"], ["created_at", "2020-01-20 20:55:00.339405"], ["updated_at", "2020-01-20 20:55:00.339405"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 3], ["y", 1], ["value", "r"], ["created_at", "2020-01-20 20:55:00.344522"], ["updated_at", "2020-01-20 20:55:00.344522"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 1], ["value", "r"], ["created_at", "2020-01-20 20:55:00.347019"], ["updated_at", "2020-01-20 20:55:00.347019"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 5], ["y", 1], ["value", "o"], ["created_at", "2020-01-20 20:55:00.349315"], ["updated_at", "2020-01-20 20:55:00.349315"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 1], ["value", "w"], ["created_at", "2020-01-20 20:55:00.351598"], ["updated_at", "2020-01-20 20:55:00.351598"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 2], ["value", "r"], ["created_at", "2020-01-20 20:55:00.354430"], ["updated_at", "2020-01-20 20:55:00.354430"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.8ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 1], ["y", 2], ["value", "a"], ["created_at", "2020-01-20 20:55:00.357008"], ["updated_at", "2020-01-20 20:55:00.357008"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 2], ["value", "t"], ["created_at", "2020-01-20 20:55:00.362108"], ["updated_at", "2020-01-20 20:55:00.362108"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 2], ["value", "o"], ["created_at", "2020-01-20 20:55:00.364549"], ["updated_at", "2020-01-20 20:55:00.364549"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 2], ["value", "o"], ["created_at", "2020-01-20 20:55:00.366766"], ["updated_at", "2020-01-20 20:55:00.366766"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.3ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 0], ["y", 3], ["value", "t"], ["created_at", "2020-01-20 20:55:00.369033"], ["updated_at", "2020-01-20 20:55:00.369033"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 3], ["value", "t"], ["created_at", "2020-01-20 20:55:00.371769"], ["updated_at", "2020-01-20 20:55:00.371769"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 3], ["value", "o"], ["created_at", "2020-01-20 20:55:00.374157"], ["updated_at", "2020-01-20 20:55:00.374157"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 5], ["y", 3], ["value", "a"], ["created_at", "2020-01-20 20:55:00.376225"], ["updated_at", "2020-01-20 20:55:00.376225"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 3], ["value", "r"], ["created_at", "2020-01-20 20:55:00.378261"], ["updated_at", "2020-01-20 20:55:00.378261"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 4], ["value", "o"], ["created_at", "2020-01-20 20:55:00.380330"], ["updated_at", "2020-01-20 20:55:00.380330"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 3], ["y", 4], ["value", "a"], ["created_at", "2020-01-20 20:55:00.382396"], ["updated_at", "2020-01-20 20:55:00.382396"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 4], ["y", 4], ["value", "t"], ["created_at", "2020-01-20 20:55:00.384454"], ["updated_at", "2020-01-20 20:55:00.384454"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 6], ["y", 4], ["value", "d"], ["created_at", "2020-01-20 20:55:00.386560"], ["updated_at", "2020-01-20 20:55:00.386560"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["x", 2], ["y", 5], ["value", "o"], ["created_at", "2020-01-20 20:55:00.388565"], ["updated_at", "2020-01-20 20:55:00.388565"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.8ms)[0m  [1m[35mWITH subset AS (
+  SELECT *
+  FROM placements
+  WHERE placements.x BETWEEN -50 AND 50
+    AND placements.y BETWEEN -50 AND 50
+)
+
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (x - 1) OR lag IS NULL) AND x != -50 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY y ORDER BY x)
+  FROM ( SELECT *, lag(x) OVER ( PARTITION BY y ORDER BY x ) FROM subset) AS partitioned ) AS marked
+  WHERE sum > 0
+  GROUP BY y, sum
+  HAVING count(*) > 1 AND max(x) < 50
+UNION
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (y - 1) OR lag IS NULL) AND y != -50 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY x ORDER BY y)
+  FROM (
+    SELECT *, lag(y) OVER ( PARTITION BY x ORDER BY y ) FROM subset) AS partitioned) AS marked
+  WHERE sum > 0
+  GROUP BY x, sum
+  HAVING count(*) > 1 AND max(y) < 50;
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mWITH subset AS (
+  SELECT *
+  FROM placements
+  WHERE placements.x BETWEEN 0 AND 6
+    AND placements.y BETWEEN 0 AND 6
+)
+
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (x - 1) OR lag IS NULL) AND x != 0 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY y ORDER BY x)
+  FROM ( SELECT *, lag(x) OVER ( PARTITION BY y ORDER BY x ) FROM subset) AS partitioned ) AS marked
+  WHERE sum > 0
+  GROUP BY y, sum
+  HAVING count(*) > 1 AND max(x) < 6
+UNION
+SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
+  SELECT *,
+    SUM(CASE WHEN (lag != (y - 1) OR lag IS NULL) AND y != 0 THEN 1 ELSE 0 END)
+      OVER (PARTITION BY x ORDER BY y)
+  FROM (
+    SELECT *, lag(y) OVER ( PARTITION BY x ORDER BY y ) FROM subset) AS partitioned) AS marked
+  WHERE sum > 0
+  GROUP BY x, sum
+  HAVING count(*) > 1 AND max(y) < 6;
+[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------
+WordTest: test_Basics
+---------------------
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlayer Create (0.2ms)[0m  [1m[32mINSERT INTO "players" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2020-01-20 20:55:00.394695"], ["updated_at", "2020-01-20 20:55:00.394695"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMove Create (0.2ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["player_id", 14], ["created_at", "2020-01-20 20:55:00.396139"], ["updated_at", "2020-01-20 20:55:00.396139"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 2], ["y", 1], ["value", "t"], ["move_id", 14], ["created_at", "2020-01-20 20:55:00.397622"], ["updated_at", "2020-01-20 20:55:00.397622"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 3], ["y", 1], ["value", "e"], ["move_id", 14], ["created_at", "2020-01-20 20:55:00.399118"], ["updated_at", "2020-01-20 20:55:00.399118"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 4], ["y", 1], ["value", "s"], ["move_id", 14], ["created_at", "2020-01-20 20:55:00.400495"], ["updated_at", "2020-01-20 20:55:00.400495"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 5], ["y", 1], ["value", "t"], ["move_id", 14], ["created_at", "2020-01-20 20:55:00.401934"], ["updated_at", "2020-01-20 20:55:00.401934"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "placements" WHERE "placements"."move_id" = $1[0m  [["move_id", 14]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlayer Create (0.2ms)[0m  [1m[32mINSERT INTO "players" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2020-01-20 20:55:00.406447"], ["updated_at", "2020-01-20 20:55:00.406447"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMove Create (0.2ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["player_id", 15], ["created_at", "2020-01-20 20:55:00.407910"], ["updated_at", "2020-01-20 20:55:00.407910"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 6], ["y", 1], ["value", "t"], ["move_id", 15], ["created_at", "2020-01-20 20:55:00.409385"], ["updated_at", "2020-01-20 20:55:00.409385"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 7], ["y", 1], ["value", "e"], ["move_id", 15], ["created_at", "2020-01-20 20:55:00.410918"], ["updated_at", "2020-01-20 20:55:00.410918"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 8], ["y", 1], ["value", "s"], ["move_id", 15], ["created_at", "2020-01-20 20:55:00.412302"], ["updated_at", "2020-01-20 20:55:00.412302"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPlacement Create (0.2ms)[0m  [1m[32mINSERT INTO "placements" ("x", "y", "value", "move_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["x", 9], ["y", 1], ["value", "t"], ["move_id", 15], ["created_at", "2020-01-20 20:55:00.413674"], ["updated_at", "2020-01-20 20:55:00.413674"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPlacement Load (0.2ms)[0m  [1m[34mSELECT "placements".* FROM "placements" WHERE "placements"."move_id" = $1[0m  [["move_id", 15]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m

@@ -12,7 +12,7 @@ class WordLocatorTest < ActiveSupport::TestCase
     ]
     grid.each.with_index do |row, y_idx|
       row.each.with_index do |l, x_idx|
-        create :letter, x: x_idx, y: y_idx, value: l, word: Word.new unless l == "_"
+        create :placement, x: x_idx, y: y_idx, value: l, move: Move.new unless l == "_"
       end
     end
   end

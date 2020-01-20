@@ -3,10 +3,10 @@ FactoryBot.define do
     n
   end
 
-  factory :letter do
+  factory :placement do
     x { generate :coords }
     y { 1 }
-    word { create :word, spelling: '' }
+    move { create :move, spelling: '' }
     value { ('a'..'z').to_a.sample }
   end
 end

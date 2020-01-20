@@ -1,3 +1,8 @@
+
+#
+# Locates all words strictly within a radius of a central location
+#
+
 class WordLocator
   def initialize(centered_at_x, centered_at_y, radius = 50)
     @x_min = centered_at_x - radius
@@ -10,9 +15,9 @@ class WordLocator
     query = <<~SQL
     WITH subset AS (
       SELECT *
-      FROM letters
-      WHERE letters.x BETWEEN :x_min AND :x_max
-        AND letters.y BETWEEN :y_min AND :y_max
+      FROM placements
+      WHERE placements.x BETWEEN :x_min AND :x_max
+        AND placements.y BETWEEN :y_min AND :y_max
     )
 
     SELECT STRING_AGG(value, ''), ARRAY_AGG(sum) as max FROM (
