@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
   get "state" => "state#index"
-  post "move" => "move#create"
+  post "move" => "moves#create"
 end
