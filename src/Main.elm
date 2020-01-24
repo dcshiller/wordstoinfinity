@@ -8,6 +8,7 @@ import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
 import Http
 import Json.Decode as Decode exposing (field, int, list, map3, string)
+import Space exposing (renderSpace)
 
 
 main : Program () Model Msg
@@ -230,48 +231,6 @@ mergeSpaceLists grid1 grid2 =
     List.map (coalesceSpaceFromList grid2) grid1
 
 
-renderSpace space selected =
-    let
-        color =
-            (\x ->
-                if x then
-                    "red"
-
-                else
-                    "black"
-            )
-                selected
-
-        zIndex =
-            (\x ->
-                if x then
-                    "2"
-
-                else
-                    "1"
-            )
-                selected
-    in
-    div
-        [ style "position" "absolute"
-        , style "top" (String.fromInt space.y ++ "in")
-        , style "left" (String.fromInt space.x ++ "in")
-        , style "width" "1in"
-        , style "height" "1in"
-        , style "border" ("3px solid " ++ color)
-        , style "font-size" "1in"
-        , style "box-sizing" "border-box"
-        , style "text-align" "1center"
-        , style "display" "flex"
-        , style "align-items" "center"
-        , style "justify-content" "space-around"
-        , style "z-index" zIndex
-        , onClick (SelectCoords { x = space.x, y = space.y })
-        ]
-        [ text <| String.fromChar space.letter
-        ]
-
-
 sameCoords coords space =
     coords.x == space.x && coords.y == space.y
 
@@ -284,7 +243,7 @@ displayedSpaces model =
                 (mergeSpaceLists (emptyGrid model) model.grid)
                 (mergeSpaceLists (emptyGrid model) model.enteredLetters)
     in
-    list |> List.map (\x -> renderSpace x (sameCoords model.selectedCoords x))
+    list |> List.map (\x -> renderSpace x (sameCoords model.selectedCoords x) SelectCoords)
 
 
 view model =

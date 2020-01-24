@@ -1,2 +1,5 @@
 server/tmp
+server/.byebug_history
 oldserver
+
+elm-stuff/
