@@ -1,2 +1,2 @@
-json.placement @placements, :x, :y, :value
+json.placements Placement.all, :x, :y, :value
 json.errors @errors

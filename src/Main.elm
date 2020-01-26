@@ -1,14 +1,35 @@
 module Main exposing (main)
 
 import Browser
+import Browser.Dom
 import Browser.Events exposing (onKeyDown)
+import DataTypes exposing (Coords, Model, Space)
 import Debug
+import Grid exposing (renderGrid)
 import Html exposing (Html, div, text)
 import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
-import Http
 import Json.Decode as Decode exposing (field, int, list, map3, string)
+import Messages exposing (..)
+import Platform.Cmd exposing (batch)
+import PlayerPanel exposing (renderPanel)
+import Server
 import Space exposing (renderSpace)
+import Task
+
+
+initViewport =
+    { scene =
+        { width = 0.0
+        , height = 0.0
+        }
+    , viewport =
+        { x = 0.0
+        , y = 0.0
+        , width = 0.0
+        , height = 0.0
+        }
+    }
 
 
 main : Program () Model Msg
@@ -21,49 +42,18 @@ main =
         }
 
 
-type Msg
-    = SelectCoords Coords
-    | CharacterKey Char
-    | ControlKey String
-    | FetchUpdate
-    | UpdateState (Result Http.Error (List Placement))
-
-
-type alias Coords =
-    { x : Int
-    , y : Int
-    }
-
-
-type alias Placement =
-    { x : Int
-    , y : Int
-    , value : String
-    }
-
-
-type alias Space =
-    { x : Int
-    , y : Int
-    , letter : Char
-    }
-
-
-type alias Model =
-    { grid : List Space
-    , letters : List Char
-    , enteredLetters : List Space
-    , selectedCoords : Coords
-    }
-
-
 init flags =
     ( { grid = []
       , letters = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]
       , enteredLetters = []
       , selectedCoords = { x = 0, y = 0 }
+      , viewport = initViewport
+      , offset = { x = 0, y = 0 }
       }
-    , getState
+    , batch
+        [ Server.getState
+        , Task.perform UpdateViewport Browser.Dom.getViewport
+        ]
     )
 
 
@@ -85,15 +75,24 @@ update msg model =
             ( updateSelection model string, Cmd.none )
 
         FetchUpdate ->
-            ( model, getState )
+            ( model, Server.getState )
 
         UpdateState result ->
             case result of
                 Ok text ->
-                    ( { model | grid = placementsToSpaces text }, Cmd.none )
+                    ( { model | grid = Server.extractState text }, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
+
+        UpdateViewport viewport ->
+            ( { model | viewport = viewport }, Cmd.none )
+
+        SubmitPlacements ->
+            ( { model | enteredLetters = [] }, Server.postPlacements model )
+
+        ClearPlacements ->
+            ( { model | enteredLetters = [] }, Cmd.none )
 
 
 keyDecoder : Decode.Decoder Msg
@@ -117,38 +116,6 @@ log model result =
             Debug.log "y" (Debug.toString result)
     in
     model
-
-
-firstChar list =
-    case List.head list of
-        Just char ->
-            char
-
-        _ ->
-            ' '
-
-
-placementToSpace placement =
-    { x = placement.x
-    , y = placement.y
-    , letter =
-        firstChar (String.toList placement.value)
-    }
-
-
-placementsToSpaces placements =
-    List.map placementToSpace placements
-
-
-placementDecoder =
-    field "placements" <| list (map3 Placement (field "x" int) (field "y" int) (field "value" string))
-
-
-getState =
-    Http.get
-        { url = "http://localhost:3000/state"
-        , expect = Http.expectJson UpdateState placementDecoder
-        }
 
 
 updateEnteredLetters model char =
@@ -190,12 +157,22 @@ updateSelection model string =
 
         currentSelectedCoords =
             model.selectedCoords
+
+        newX =
+            currentSelectedCoords.x + xChange
+
+        newY =
+            currentSelectedCoords.y + yChange
     in
     { model
         | selectedCoords =
             { currentSelectedCoords
-                | x = currentSelectedCoords.x + xChange
-                , y = currentSelectedCoords.y + yChange
+                | x = newX
+                , y = newY
+            }
+        , offset =
+            { x = max (min model.offset.x newX) (newX - 10)
+            , y = max (min model.offset.y newY) (newY - 10)
             }
     }
 
@@ -243,7 +220,7 @@ displayedSpaces model =
                 (mergeSpaceLists (emptyGrid model) model.grid)
                 (mergeSpaceLists (emptyGrid model) model.enteredLetters)
     in
-    list |> List.map (\x -> renderSpace x (sameCoords model.selectedCoords x) SelectCoords)
+    list |> List.map (\x -> renderSpace x model.offset (sameCoords model.selectedCoords x) SelectCoords)
 
 
 view model =
@@ -258,4 +235,6 @@ view model =
             , style "left" "0"
             ]
             (displayedSpaces model)
+        , renderGrid model
+        , renderPanel model
         ]

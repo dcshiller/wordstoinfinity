@@ -10,7 +10,7 @@ color selected =
         "red"
 
     else
-        "black"
+        "white"
 
 
 backgroundColor space =
@@ -49,14 +49,14 @@ renderLetter space =
                 [ text <| String.fromChar space.letter ]
 
 
-renderSpace space selected msg =
+renderSpace space offset selected msg =
     div
         [ style "position" "absolute"
-        , style "top" (String.fromInt space.y ++ "in")
-        , style "left" (String.fromInt space.x ++ "in")
-        , style "width" "1in"
-        , style "height" "1in"
-        , style "border" ("3px solid " ++ color selected)
+        , style "top" (String.fromInt (space.y - offset.y) ++ "in")
+        , style "left" (String.fromInt (space.x - offset.x) ++ "in")
+        , style "width" "calc(1in + 5px)"
+        , style "height" "calc(1in + 5px)"
+        , style "border" ("5px solid " ++ color selected)
         , style "font-size" "1in"
         , style "box-sizing" "border-box"
         , style "display" "flex"
